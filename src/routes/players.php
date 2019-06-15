@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpUndefinedMethodInspection */
+
 /**
  * Created by PhpStorm.
  * User: RickDAM
@@ -9,14 +10,6 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-$app = new \Slim\App(['settings' => ['displayErrorDetails' => true]]);
-
-$silverPlayersCount = 3643;
-$lastSilverPage = 121;
-
-$bronzePlayersCount = 12069;
-$lastBronzePage = 402;
-
 $app->get('/players', function (Request $request, Response $response) {
     $jsonData = array();
     if (isset($request->getQueryParams()['club'])) {
@@ -24,31 +17,26 @@ $app->get('/players', function (Request $request, Response $response) {
     } else if (isset($request->getQueryParams()['search'])) {
         $jsonData = getPlayersBySearch($request->getQueryParams());
     }
-    /** @noinspection PhpUndefinedMethodInspection */
     return $response->withJson($jsonData, $jsonData['code']);
 });
 
 $app->get('/players/gold', function (Request $request, Response $response) {
     $jsonData = getCategoryPlayersByPagination($request->getQueryParams(), "gold");
-    /** @noinspection PhpUndefinedMethodInspection */
     return $response->withJson($jsonData, $jsonData['code']);
 });
 
 $app->get('/players/silver', function (Request $request, Response $response) {
     $jsonData = getCategoryPlayersByPagination($request->getQueryParams(), "silver");
-    /** @noinspection PhpUndefinedMethodInspection */
     return $response->withJson($jsonData, $jsonData['code']);
 });
 
 $app->get('/players/bronze', function (Request $request, Response $response) {
     $jsonData = getCategoryPlayersByPagination($request->getQueryParams(), "bronze");
-    /** @noinspection PhpUndefinedMethodInspection */
     return $response->withJson($jsonData, $jsonData['code']);
 });
 
 $app->get('/players/{id}', function (Request $request, Response $response) {
     $jsonData = getPlayerById($request->getAttributes());
-    /** @noinspection PhpUndefinedMethodInspection */
     return $response->withJson($jsonData, $jsonData['code']);
 });
 
