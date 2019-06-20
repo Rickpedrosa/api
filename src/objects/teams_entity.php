@@ -23,7 +23,7 @@ class Team
     {
         $stmt = null;
         $query = new qteams();
-        $limit = isset($params['limit']) ? $params['search'] : 30;
+        $limit = isset($params['limit']) ? $params['limit'] : 30;
 
         if (isset($params['all'])) {
             $stmt = $this->conn->prepare($query->BY_ALL);
